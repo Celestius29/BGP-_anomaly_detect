@@ -1,4 +1,4 @@
-# BGP-_anomaly_detect
+# BGP-_anomaly_detection
 Using ML algorithm to detect anomaly in wireless networks.
 THis project undertakes a dataset with the following columns:
 H+M,H , M,	S,	NoA,	NoW,	NoA NLRI prefixes,	NoW NLRI prefixes,	Avg AS PL,	Max AS PL,	Avg UAS PL,	No DA,	No WA,	No IW,	AED,	MED,	IAT,	No IGP packets,	No EGP packets,	No of Incomplete packets,	Packet size (B),	regular or anomalous.<br>
@@ -31,3 +31,5 @@ List of features extracted from BGP update messages:<br>
 
 Link to the dataset: (http://www.sfu.ca/~ljilja/cnl/projects/BGP_datasets/index.html)
 ![image](https://github.com/Celestius29/BGP-_anomaly_detect/assets/60284629/3b49a3fe-212b-409e-86a9-ad42be07a69b)
+
+Use the code provided for the 3 different datasets we have for the 3 different ransomware attacks. Visualizations and results will be attached.
