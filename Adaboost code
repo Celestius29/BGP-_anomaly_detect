@@ -1,0 +1,41 @@
+#Adding Adaboost as another comparative ML model
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.impute import KNNImputer
+from sklearn.metrics import roc_auc_score
+
+# Load features and labels from dataset according to your dataset
+X = dataset.iloc[:, 0:21].values
+y = dataset.iloc[:, 21].values
+
+# Check for missing values if there are any nan values
+missing_values = np.isnan(X).any(axis=1)
+
+# Impute missing values with KNN (5 neighbors)
+if missing_values.any():
+    imputer = KNNImputer(n_neighbors=5)
+    X_imputed = imputer.fit_transform(X)
+else:
+    X_imputed = X.copy()
+
+# Split data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X_imputed, y, test_size=0.2, random_state=0)
+
+# Define base learner - Decision TreeClassifier
+base_estimator = DecisionTreeClassifier(max_depth=5)
+
+# Define and train AdaBoostClassifier
+adb_model = AdaBoostClassifier(base_estimator=base_estimator, n_estimators=100, learning_rate=0.1)
+adb_model.fit(X_train, y_train)
+
+# Make predictions and probabilities
+adb_predictions = adb_model.predict(X_test)
+adb_probs = adb_model.predict_proba(X_test)[:, 1]
+
+# Calculate ROC AUC score
+adb_roc_auc = roc_auc_score(y_test, adb_probs)
+
+# Print results
+print("AdaBoostClassifier ROC AUC score:", adb_roc_auc)
+
